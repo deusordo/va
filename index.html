@@ -7,7 +7,7 @@
   <meta name="description" content="Vullnet Ameti. Have an idea, a challenge, or something you’re working toward? Let’s talk.">
   <title>Vullnet Ameti — Let's Connect</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=7cd12937c699">
+  <link rel="stylesheet" href="styles.css?v=d0b24bd516ce">
 </head>
 <body>
   <main class="hero">
@@ -40,20 +40,32 @@
           </div>
           <label class="field-label" for="message">What do you need help with?</label>
           <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="What do you need help with?"></textarea>
-          <details class="time-request" id="time-request">
-            <summary>Suggest a date and time (optional)</summary>
-            <div class="field-row time-fields">
-              <div>
-                <label for="preferred-date">Preferred date</label>
-                <input id="preferred-date" name="preferred_date" type="date" aria-describedby="time-request-help">
+          <fieldset class="time-request" id="time-request" aria-describedby="time-request-help">
+            <legend>Suggest a time (optional)</legend>
+            <div class="calendar-view">
+              <div class="month-heading">
+                <button type="button" id="previous-month" aria-label="Previous month">‹</button>
+                <p id="preferred-month" aria-live="polite"></p>
+                <button type="button" id="next-month" aria-label="Next month">›</button>
               </div>
-              <div>
-                <label for="preferred-time">Preferred time</label>
-                <input id="preferred-time" name="preferred_time" type="time" aria-describedby="time-request-help">
+              <div class="calendar-week" aria-hidden="true">
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
               </div>
+              <div class="calendar-days" role="group" aria-labelledby="preferred-month"></div>
+            </div>
+            <div class="time-view" hidden>
+              <div class="time-heading">
+                <button type="button" id="back-to-dates">‹ Dates</button>
+                <h3 id="chosen-date" tabindex="-1"></h3>
+              </div>
+              <div class="time-slots" role="group" aria-label="Preferred time slots"></div>
+            </div>
+            <div class="time-choice">
+              <p class="time-feedback" role="status"></p>
+              <button type="button" id="clear-time" hidden>Clear</button>
             </div>
             <p class="time-help" id="time-request-help">Central Time. I’ll confirm after reviewing your request.</p>
-          </details>
+          </fieldset>
           <input type="hidden" name="_subject" value="Personal Site — New Contact">
           <div class="honeypot" aria-hidden="true"><label for="website">Leave this blank</label><input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
           <button class="button send" type="submit">Send Message <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
@@ -64,7 +76,8 @@
     <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1254" height="1254"></div>
     <div class="matrix-trail" aria-hidden="true"></div>
   </main>
-  <script src="script.js?v=47cdba989dc6"></script>
+  <script src="time-picker.js?v=47799e6483bf" defer></script>
+  <script src="script.js?v=d8ec25846b2c" defer></script>
   <script src="matrix.js?v=2095cfff401c" defer></script>
   <script src="eyes.js?v=c172fd21fd25" defer></script>
   <script src="typewriter.js?v=384c8121371e" defer></script>
