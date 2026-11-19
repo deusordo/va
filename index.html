@@ -12,24 +12,28 @@
   <main class="hero">
     <section class="content" aria-labelledby="page-title">
       <h1 id="page-title">Vullnet Ameti</h1>
-      <p class="tagline">Building ideas, systems, and communities that create real impact.</p>
+      <p class="tagline">Building ideas, systems, and communities that create <span class="tagline-ending">real impact.</span></p>
       <div class="rule" aria-hidden="true"></div>
-      <button id="open-form" class="button" type="button" aria-expanded="false" aria-controls="contact-panel">Let’s Connect <span aria-hidden="true">→</span></button>
+      <button id="open-form" class="button" type="button" aria-expanded="false" aria-controls="contact-panel">Let’s Connect <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
       <section id="contact-panel" class="contact-panel" aria-label="Contact form" hidden>
-        <div class="panel-heading"><h2>Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form">×</button></div>
+        <div class="panel-heading"><h2>Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form"><img class="icon" src="x.svg" alt="" aria-hidden="true"></button></div>
         <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
-          <label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Your name">
-          <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com">
-          <label for="phone">Phone <span class="optional">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="Phone number">
-          <label for="message">Message</label><textarea id="message" name="message" rows="4" maxlength="5000" required placeholder="What would you like to discuss?"></textarea>
+          <label class="field-label" for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Name">
+          <label class="field-label" for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="Email">
+          <label class="field-label" for="phone">Phone (optional)</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="Phone (optional)">
+          <label class="field-label" for="message">Message</label>
+          <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="Message"></textarea>
           <input type="hidden" name="_subject" value="Personal Site — New Contact">
           <div class="honeypot" aria-hidden="true"><label for="website">Leave this blank</label><input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
-          <button class="button send" type="submit">Send Message <span aria-hidden="true">→</span></button>
+          <button class="button send" type="submit">Send Message <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
           <p id="form-status" class="status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </section>
-    <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1248" height="1248"></div>
+    <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1254" height="1254"></div>
   </main>
   <script src="script.js"></script>
 </body>
