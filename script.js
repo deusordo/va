@@ -31,6 +31,9 @@ form.addEventListener('submit',async e=>{
   data.set('last_name', lastName);
   data.set('name', `${firstName} ${lastName}`);
   const requestedTime = timePicker.append(data);
+  data.set('message', `${message.value}
+
+Preferred date and time: ${requestedTime ?? 'No time selected.'}`);
   submit.disabled = true;
   status.textContent = 'Sending…';
   try {
@@ -43,7 +46,7 @@ form.addEventListener('submit',async e=>{
     form.reset();
     timePicker.reset();
     status.textContent = requestedTime
-      ? 'Message sent. I’ll follow up to confirm a time.'
+      ? `Message sent. Requested time: ${requestedTime}. I’ll follow up to confirm.`
       : 'Message sent. Thank you for reaching out.';
   } catch {
     status.textContent = 'Message could not be sent. Please try again later.';

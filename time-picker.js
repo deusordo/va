@@ -94,12 +94,15 @@ function createTimePicker(picker) {
     calendar.hidden = false;
   }
 
+  function formatTime(minutes) {
+    return timeFormat.format(new Date(Date.UTC(2000, 0, 1, 0, minutes)));
+  }
+
   function renderTimes() {
     const date = new Date(`${selectedDate}T00:00:00Z`);
     dateLabel.textContent = shortDate.format(date);
     const choices = availableChoices(selectedDate, centralNow()).map(minutes => {
-      const clock = new Date(Date.UTC(2000, 0, 1, 0, minutes));
-      const button = makeButton(timeFormat.format(clock), minutes);
+      const button = makeButton(formatTime(minutes), minutes);
       button.setAttribute('aria-pressed', String(minutes === selectedTime));
       return button;
     });
@@ -197,13 +200,14 @@ function createTimePicker(picker) {
       return false;
     },
     append(data) {
-      if (selectedTime === null) return false;
+      if (selectedTime === null) return null;
       const hours = String(Math.floor(selectedTime / 60)).padStart(2, '0');
       const minutes = String(selectedTime % 60).padStart(2, '0');
       data.set('preferred_date', selectedDate);
       data.set('preferred_time', `${hours}:${minutes}`);
       data.set('preferred_time_zone', timeZone);
-      return true;
+      const date = fullDate.format(new Date(`${selectedDate}T00:00:00Z`));
+      return `${date} at ${formatTime(selectedTime)} Central Time`;
     },
     reset
   };
