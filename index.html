@@ -19,8 +19,10 @@
       <section id="contact-panel" class="contact-panel" aria-label="Contact form" hidden>
         <div class="panel-heading"><h2>Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form"><img class="icon" src="x.svg" alt="" aria-hidden="true"></button></div>
         <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
-          <label class="field-label" for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="120" required placeholder="Name">
+          <label class="field-label" for="first-name">First Name</label>
+          <input id="first-name" name="first_name" type="text" autocomplete="given-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="First Name">
+          <label class="field-label" for="last-name">Last Name</label>
+          <input id="last-name" name="last_name" type="text" autocomplete="family-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="Last Name">
           <label class="field-label" for="email">Email</label>
           <input id="email" name="email" type="email" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter an email address like you@example.com." maxlength="254" required placeholder="Email">
           <label class="field-label" for="phone">Phone Number</label>
@@ -36,6 +38,6 @@
     </section>
     <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1254" height="1254"></div>
   </main>
-  <script src="script.js?v=97c7c55bb9ad"></script>
+  <script src="script.js?v=cc9979c3d016"></script>
 </body>
 </html>
