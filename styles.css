@@ -48,6 +48,36 @@ h1 {
   white-space: nowrap;
 }
 
+.tagline-is-animated .tagline-original {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.tagline-word {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tagline-word::after {
+    display: inline-block;
+    width: .065em;
+    height: .82em;
+    margin-inline-start: .13em;
+    vertical-align: -.055em;
+    background: currentColor;
+    content: "";
+    animation: tagline-caret 1s step-end infinite;
+  }
+
+  @keyframes tagline-caret {
+    50% { opacity: 0; }
+  }
+}
+
 .rule {
   width: 4.85rem;
   height: 2px;
