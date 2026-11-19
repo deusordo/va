@@ -19,7 +19,12 @@ function createTimePicker(picker) {
   const fullDate = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', dateStyle: 'full' });
   const shortDate = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric' });
   const timeFormat = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', hour: 'numeric', minute: '2-digit' });
-  const halfHours = Array.from({ length: 25 }, (_, index) => 8 * 60 + index * 30);
+  const firstMinute = 16 * 60;
+  const lastMinute = 21 * 60;
+  const halfHours = Array.from(
+    { length: (lastMinute - firstMinute) / 30 + 1 },
+    (_, index) => firstMinute + index * 30
+  );
 
   let displayedMonth = centralNow().month;
   let selectedDate = '';
@@ -35,7 +40,8 @@ function createTimePicker(picker) {
   }
 
   function availableChoices(date, now) {
-    if (date < now.date) return [];
+    const dayOfWeek = new Date(`${date}T00:00:00Z`).getUTCDay();
+    if (date < now.date || dayOfWeek === 0 || dayOfWeek === 6) return [];
     return halfHours.filter(minutes => date !== now.date || minutes >= now.minutes);
   }
 
@@ -125,13 +131,17 @@ function createTimePicker(picker) {
     const offsets = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
     const offset = offsets[event.key];
     if (offset === undefined || !event.target.matches('button')) return;
-    const buttons = Array.from(days.querySelectorAll('button:not(:disabled)'));
-    const index = buttons.indexOf(event.target);
-    const target = buttons[Math.max(0, Math.min(buttons.length - 1, index + offset))];
+    const buttons = Array.from(days.querySelectorAll('button'));
+    const current = buttons.indexOf(event.target);
     event.preventDefault();
-    event.target.tabIndex = -1;
-    target.tabIndex = 0;
-    target.focus();
+    for (let index = current + offset; index >= 0 && index < buttons.length; index += offset) {
+      const target = buttons[index];
+      if (target.disabled) continue;
+      event.target.tabIndex = -1;
+      target.tabIndex = 0;
+      target.focus();
+      break;
+    }
   });
 
   days.addEventListener('click', event => {
