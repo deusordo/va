@@ -273,16 +273,3 @@ textarea {
     mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 83%, transparent);
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .contact-panel:not([hidden]) {
-    animation: appear .18s ease-out;
-  }
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-  }
-}
