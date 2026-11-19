@@ -18,7 +18,7 @@ form.addEventListener('submit',async e=>{
   const submit = form.querySelector('[type=submit]');
   if (submit.disabled) return;
   status.textContent = '';
-  message.setCustomValidity(message.value.trim() ? '' : 'Enter a message.');
+  message.setCustomValidity(message.value.trim() ? '' : 'Tell me what you need help with.');
   if (!form.reportValidity()) return;
   const data = new FormData(form);
   const firstName = form.elements.first_name.value.trim();

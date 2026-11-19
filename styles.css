@@ -37,16 +37,23 @@ h1 {
 }
 
 .tagline {
-  max-width: min(34vw, 33rem);
-  margin: 0;
-  color: #bebec1;
-  font-size: clamp(1.375rem, 2.5vw, 2.3rem);
-  line-height: 1.13;
+  margin: 0 0 .8rem;
+  color: #f0f0f2;
+  font-size: clamp(1.65rem, 3.1vw, 2.8rem);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -.025em;
 }
 
-.tagline-ending {
-  white-space: nowrap;
+.intro-copy {
+  max-width: 28rem;
+  color: #bebec1;
+  font-size: clamp(1rem, 1.5vw, 1.225rem);
+  line-height: 1.45;
 }
+
+.intro-copy p { margin: 0; }
+.intro-copy p + p { margin-block-start: .65rem; }
 
 .tagline-is-animated .tagline-original {
   position: absolute;
@@ -295,9 +302,7 @@ textarea {
   }
 
   .tagline {
-    max-width: 26rem;
-    font-size: clamp(1.3rem, 4.5vw, 1.65rem);
-    line-height: 1.22;
+    font-size: clamp(1.45rem, 5.6vw, 1.95rem);
   }
 
   .rule {

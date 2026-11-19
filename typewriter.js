@@ -5,11 +5,11 @@
   const animated = tagline.querySelector(".tagline-animated");
   const wordSlot = animated.querySelector(".tagline-word");
   const motion = matchMedia("(prefers-reduced-motion: no-preference)");
-  const words = ["ideas", "systems", "communities"];
+  const words = ["talk.", "connect.", "explore.", "collaborate.", "build.", "create.", "solve.", "improve."];
   let index = 0;
-  let letters = 0;
-  let deleting = false;
-  let delay = 380;
+  let letters = words[0].length;
+  let deleting = true;
+  let delay = 2200;
   let timer;
 
   function schedule() {
