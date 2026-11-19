@@ -108,6 +108,30 @@ textarea:focus-visible {
   mask-image: linear-gradient(to right, transparent, #000 20%);
 }
 
+.matrix-trail {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.matrix-trail span {
+  position: absolute;
+  color: #a0dfbd;
+  opacity: 0;
+  font: 500 .8rem / 1 ui-monospace, monospace;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .matrix-trail span { animation: digit-fade .65s ease-out both; }
+
+  @keyframes digit-fade {
+    0% { opacity: 0; }
+    14% { opacity: .37; }
+    100% { opacity: 0; transform: translateY(5px); }
+  }
+}
+
 .contact-panel {
   width: min(100%, 27.6rem);
   margin-block-start: 1.9rem;
