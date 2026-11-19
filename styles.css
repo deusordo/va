@@ -163,6 +163,12 @@ form {
   gap: .5rem;
 }
 
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+}
+
 .field-label {
   position: absolute;
   width: 1px;

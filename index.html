@@ -7,7 +7,7 @@
   <meta name="description" content="Vullnet Ameti — Building ideas, systems, and communities that create real impact.">
   <title>Vullnet Ameti — Let's Connect</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=fdcdcd946017">
+  <link rel="stylesheet" href="styles.css?v=f4028e9b12af">
 </head>
 <body>
   <main class="hero">
@@ -19,14 +19,18 @@
       <section id="contact-panel" class="contact-panel" aria-label="Contact form" hidden>
         <div class="panel-heading"><h2>Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form"><img class="icon" src="x.svg" alt="" aria-hidden="true"></button></div>
         <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
-          <label class="field-label" for="first-name">First Name</label>
-          <input id="first-name" name="first_name" type="text" autocomplete="given-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="First Name">
-          <label class="field-label" for="last-name">Last Name</label>
-          <input id="last-name" name="last_name" type="text" autocomplete="family-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="Last Name">
-          <label class="field-label" for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter an email address like you@example.com." maxlength="254" required placeholder="Email">
-          <label class="field-label" for="phone">Phone Number</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="\+?(?:[ .\(\)\-]*[0-9]){7,15}[ .\(\)\-]*" title="Enter 7 to 15 digits. Common phone formatting is allowed." maxlength="40" required placeholder="Phone Number">
+          <div class="field-row">
+            <label class="field-label" for="first-name">First Name</label>
+            <input id="first-name" name="first_name" type="text" autocomplete="given-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="First Name">
+            <label class="field-label" for="last-name">Last Name</label>
+            <input id="last-name" name="last_name" type="text" autocomplete="family-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="Last Name">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter an email address like you@example.com." maxlength="254" required placeholder="Email">
+            <label class="field-label" for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="\+?(?:[ .\(\)\-]*[0-9]){7,15}[ .\(\)\-]*" title="Enter 7 to 15 digits. Common phone formatting is allowed." maxlength="40" required placeholder="Phone">
+          </div>
           <label class="field-label" for="message">Message</label>
           <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="Message"></textarea>
           <input type="hidden" name="_subject" value="Personal Site — New Contact">
