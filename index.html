@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17171b">
+  <meta name="description" content="Vullnet Ameti — Building ideas, systems, and communities that create real impact.">
+  <title>Vullnet Ameti — Let's Connect</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="hero">
+    <section class="content" aria-labelledby="page-title">
+      <h1 id="page-title">Vullnet Ameti</h1>
+      <p class="tagline">Building ideas, systems, and communities that create real impact.</p>
+      <div class="rule" aria-hidden="true"></div>
+      <button id="open-form" class="button" type="button" aria-expanded="false" aria-controls="contact-panel">Let’s Connect <span aria-hidden="true">→</span></button>
+      <section id="contact-panel" class="contact-panel" aria-label="Contact form" hidden>
+        <div class="panel-heading"><h2>Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form">×</button></div>
+        <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
+          <label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Your name">
+          <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com">
+          <label for="phone">Phone <span class="optional">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="Phone number">
+          <label for="message">Message</label><textarea id="message" name="message" rows="4" maxlength="5000" required placeholder="What would you like to discuss?"></textarea>
+          <input type="hidden" name="_subject" value="Personal Site — New Contact">
+          <div class="honeypot" aria-hidden="true"><label for="website">Leave this blank</label><input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="button send" type="submit">Send Message <span aria-hidden="true">→</span></button>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+    <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1248" height="1248"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
