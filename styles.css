@@ -119,6 +119,7 @@ h1 {
 
 .button:focus-visible,
 .close:focus-visible,
+.time-request summary:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid #bcbcff;
@@ -228,6 +229,42 @@ form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .5rem;
+}
+
+.time-request {
+  color: #d8d8db;
+  font-size: .9rem;
+}
+
+.time-request summary {
+  min-height: 2.75rem;
+  padding-block: .7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.time-fields {
+  margin-block: .35rem .5rem;
+}
+
+.time-fields label {
+  display: block;
+  margin-bottom: .25rem;
+}
+
+.time-fields input {
+  min-width: 0;
+  min-height: 2.75rem;
+}
+
+.time-help {
+  margin: 0 0 .35rem;
+  color: #c5c5ca;
+  line-height: 1.4;
+}
+
+@media (max-width: 360px) {
+  .time-fields { grid-template-columns: 1fr; }
 }
 
 .field-label {
