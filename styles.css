@@ -122,6 +122,7 @@ h1 {
 .button:focus-visible,
 .close:focus-visible,
 .about-me summary:focus-visible,
+.about-links a:focus-visible,
 .meeting-options summary:focus-visible,
 .time-request button:focus-visible,
 input:focus-visible,
@@ -159,6 +160,21 @@ textarea:focus-visible {
 
 .about-content p { margin: 0; }
 
+.about-content .about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem 1rem;
+  margin-top: .35rem;
+}
+
+.about-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #eeeef4;
+  text-underline-offset: .2em;
+}
+
 .about-content h2 {
   margin: 1rem 0 .45rem;
   color: #eeeef4;
@@ -181,12 +197,30 @@ textarea:focus-visible {
   overflow-wrap: anywhere;
 }
 
+.work-title {
+  display: block;
+  margin-top: .15rem;
+  color: #c5c5ca;
+  font-size: .86rem;
+}
+
 .work-history dd {
   margin: 0;
   white-space: nowrap;
   text-align: end;
   font-variant-numeric: tabular-nums;
 }
+
+.about-projects,
+.about-skills {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.about-projects li + li { margin-top: .6rem; }
+.about-projects strong { color: #eeeef4; }
+.about-projects p { margin-top: .15rem; }
+.about-skills li + li { margin-top: .25rem; }
 
 .portrait-wrap {
   position: absolute;
