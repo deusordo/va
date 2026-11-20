@@ -3,16 +3,54 @@ const closeButton=document.getElementById('close-form');
 const panel=document.getElementById('contact-panel');
 const form=document.getElementById('contact-form');
 const status=document.getElementById('form-status');
+const heading = document.getElementById('contact-heading');
+const confirmation = document.getElementById('contact-confirmation');
+const confirmationRequest = document.getElementById('confirmation-request');
+const confirmationTime = document.getElementById('confirmation-time');
 const message = form.elements.message;
 const timePicker = createTimePicker(document.getElementById('time-request'));
 
 message.addEventListener('input', () => message.setCustomValidity(''));
 
+function focusConfirmation() {
+  heading.focus({ preventScroll: true });
+  heading.scrollIntoView({ block: 'center', behavior: 'instant' });
+}
+
+function showConfirmation(requestedTime) {
+  form.reset();
+  timePicker.reset();
+  status.textContent = '';
+  heading.textContent = 'Thank you.';
+  heading.setAttribute('aria-describedby', requestedTime
+    ? 'confirmation-message confirmation-request'
+    : 'confirmation-message');
+  confirmationTime.textContent = requestedTime ?? '';
+  confirmationRequest.hidden = !requestedTime;
+  form.hidden = true;
+  confirmation.hidden = false;
+  if (!panel.hidden) focusConfirmation();
+}
+
 function toggleForm(open) {
   panel.hidden = !open;
-  if (open) timePicker.refresh();
   openButton.setAttribute('aria-expanded', String(open));
-  (open ? form.elements.first_name : openButton).focus();
+  if (open) {
+    if (form.hidden) {
+      focusConfirmation();
+    } else {
+      timePicker.refresh();
+      form.elements.first_name.focus();
+    }
+  } else {
+    if (!confirmation.hidden) {
+      confirmation.hidden = true;
+      form.hidden = false;
+      heading.textContent = 'Let’s Connect';
+      heading.removeAttribute('aria-describedby');
+    }
+    openButton.focus();
+  }
 }
 openButton.addEventListener('click',()=>toggleForm(panel.hidden));
 closeButton.addEventListener('click',()=>toggleForm(false));
@@ -20,7 +58,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)toggl
 form.addEventListener('submit',async e=>{
   e.preventDefault();
   const submit = form.querySelector('[type=submit]');
-  if (submit.disabled) return;
+  if (form.hidden || submit.disabled) return;
   status.textContent = '';
   message.setCustomValidity(message.value.trim() ? '' : 'Tell me what you need help with.');
   if (!form.reportValidity() || !timePicker.validate()) return;
@@ -43,11 +81,7 @@ Preferred date and time: ${requestedTime ?? 'No time selected.'}`);
       headers: { Accept: 'application/json' }
     });
     if (!response.ok) throw Error('send failed');
-    form.reset();
-    timePicker.reset();
-    status.textContent = requestedTime
-      ? `Message sent. Requested time: ${requestedTime}. I’ll follow up to confirm.`
-      : 'Message sent. Thank you for reaching out.';
+    showConfirmation(requestedTime);
   } catch {
     status.textContent = 'Message could not be sent. Please try again later.';
   } finally {

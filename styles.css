@@ -220,10 +220,21 @@ textarea:focus-visible {
   filter: invert(1);
 }
 
-form {
+#contact-form:not([hidden]) {
   display: grid;
   gap: .5rem;
 }
+
+.contact-confirmation {
+  color: #ddd;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.contact-confirmation p { margin: 0; }
+#confirmation-request { margin-top: .9rem; }
+#confirmation-request strong { color: #fff; }
+#confirmation-request p + p { margin-top: .5rem; }
 
 .field-row {
   display: grid;
