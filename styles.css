@@ -156,6 +156,15 @@ textarea:focus-visible {
   pointer-events: none;
 }
 
+.ambient-eye {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 64px;
+  height: 38px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .matrix-trail span {
   position: absolute;
   color: #a0dfbd;
