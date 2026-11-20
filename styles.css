@@ -220,6 +220,16 @@ textarea:focus-visible {
 .work-history div, .portfolio-projects li { padding-block: .55rem; }
 .work-history div + div, .portfolio-projects li + li { border-block-start: 1px solid #ffffff24; }
 
+.project-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .65rem;
+  margin-block-end: .25rem;
+}
+
+.project-status, .project-skills { color: #acacb4; font-size: .8rem; }
+
 .portfolio-skills { display: flex; flex-wrap: wrap; gap: .4rem; }
 .portfolio-skills li {
   padding: .28rem .65rem;
