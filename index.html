@@ -6,8 +6,22 @@
   <meta name="theme-color" content="#17171b">
   <meta name="description" content="Vullnet Ameti. Have an idea, a challenge, or something you need help with? Let’s connect.">
   <title>Vullnet Ameti — Let's Connect</title>
+  <link rel="canonical" href="https://deusordo.github.io/va/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vullnet Ameti — Let’s Connect">
+  <meta property="og:description" content="Have an idea, a challenge, or something you need help with? Let’s connect.">
+  <meta property="og:url" content="https://deusordo.github.io/va/">
+  <meta property="og:image" content="https://deusordo.github.io/va/social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vullnet Ameti’s illustrated portrait beside the words Let’s Connect">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vullnet Ameti — Let’s Connect">
+  <meta name="twitter:description" content="Have an idea, a challenge, or something you need help with? Let’s connect.">
+  <meta name="twitter:image" content="https://deusordo.github.io/va/social-preview.jpg">
+  <meta name="twitter:image:alt" content="Vullnet Ameti’s illustrated portrait beside the words Let’s Connect">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=1a9879deb144">
+  <link rel="stylesheet" href="styles.css?v=6f395cb68f54">
 </head>
 <body>
   <main class="hero">
@@ -15,7 +29,7 @@
       <h1 id="page-title">Vullnet Ameti</h1>
       <h2 class="tagline">
         <span class="tagline-original">Let’s connect.</span>
-        <span class="tagline-animated" aria-hidden="true" hidden>Let’s <span class="tagline-word">talk.</span></span>
+        <span class="tagline-animated" aria-hidden="true" hidden>Let’s <span class="tagline-word">connect.</span></span>
       </h2>
       <div class="intro-copy">
         <p>Have an idea, a challenge, or something you need help with?</p>
@@ -26,21 +40,25 @@
       <section id="contact-panel" class="contact-panel" aria-labelledby="contact-heading" hidden>
         <div class="panel-heading"><h2 id="contact-heading" tabindex="-1">Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form"><img class="icon" src="x.svg" alt="" aria-hidden="true"></button></div>
         <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
-          <div class="field-row">
-            <label class="field-label" for="first-name">First Name</label>
-            <input id="first-name" name="first_name" type="text" autocomplete="given-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="First Name">
-            <label class="field-label" for="last-name">Last Name</label>
-            <input id="last-name" name="last_name" type="text" autocomplete="family-name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="80" required placeholder="Last Name">
+          <div class="form-field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" pattern="(?=.*\p{L})[\p{L}\p{M} .’'\-]+" title="Use letters, spaces, apostrophes, periods, or hyphens." maxlength="160" required>
           </div>
           <div class="field-row">
-            <label class="field-label" for="email">Email Address</label>
-            <input id="email" name="email" type="email" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter an email address like you@example.com." maxlength="254" required placeholder="Email">
-            <label class="field-label" for="phone">Phone Number (optional)</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="\+?(?:[ .\(\)\-]*[0-9]){7,15}[ .\(\)\-]*" title="Enter 7 to 15 digits. Include a country code for international numbers." maxlength="40" placeholder="Phone (optional)">
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter an email address like you@example.com." maxlength="254" required>
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="\+?(?:[ .\(\)\-]*[0-9]){7,15}[ .\(\)\-]*" title="Enter 7 to 15 digits. Include a country code for international numbers." maxlength="40">
+            </div>
           </div>
-          <label class="message-label" for="message">What can I help you with?</label>
-          <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="Tell me a little about your idea, challenge, or what you need help with."></textarea>
-          <details class="meeting-options" id="meeting-options">
+          <div class="form-field">
+            <label for="message">What can I help you with?</label>
+            <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="Tell me a little about your idea, challenge, or what you need help with."></textarea>
+          </div>
+          <details class="meeting-options" id="meeting-options" hidden>
             <summary>Suggest a meeting time (optional)</summary>
             <fieldset class="time-request" id="time-request" aria-describedby="time-hours time-request-help">
               <legend class="field-label">Preferred meeting time</legend>
@@ -76,7 +94,7 @@
               </div>
               <div class="time-choice">
                 <p class="time-feedback" role="status"></p>
-                <button type="button" id="clear-time" hidden>Clear</button>
+                <button type="button" id="skip-time">Skip scheduling</button>
               </div>
               <p class="time-help" id="time-request-help">Suggested times are requests, not confirmed appointments. I’ll follow up to confirm.</p>
             </fieldset>
@@ -87,6 +105,7 @@
           <p class="form-privacy">I use these details to respond to your inquiry and coordinate any help. Formspree processes this form.</p>
           <button class="button send" type="submit">Send Message <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
           <p id="form-status" class="status" role="status" aria-live="polite"></p>
+          <p id="form-alternative" class="status form-alternative" hidden><a href="https://www.linkedin.com/in/vameti">Or reach me on LinkedIn</a></p>
         </form>
         <div class="contact-confirmation" id="contact-confirmation" hidden>
           <p id="confirmation-message">Thanks for reaching out. I’ve received your message and will review it. I’ll be in touch about the next steps.</p>
@@ -97,50 +116,18 @@
         </div>
       </section>
       <details class="about-me">
-        <summary>About Me</summary>
+        <summary>A little about me</summary>
         <div class="about-content">
           <p>I’m Vullnet Ameti. I’ve supported healthcare teams, managed businesses, and worked on the production floor. I enjoy solving practical problems and connecting people who can help each other.</p>
-          <p class="about-links">
-            <a href="https://www.linkedin.com/in/vameti">LinkedIn</a>
-            <a href="https://www.facebook.com/profile.php?id=61583661305704">Facebook</a>
-          </p>
-          <h2>Places I’ve worked</h2>
-          <dl class="work-history">
-            <div><dt>Advocate Health <span class="work-title">IT Technical Support Administrator II</span></dt><dd>3+ years</dd></div>
-            <div><dt>Brooksource <span class="work-title">IT Field Technician</span></dt><dd>10 months</dd></div>
-            <div><dt>Illyria Capital <span class="work-title">Operations Analyst</span></dt><dd>3 months</dd></div>
-            <div><dt>xCell Mobile / Planet Wireless <span class="work-title">General Manager</span></dt><dd>2 years, 7 months</dd></div>
-            <div><dt>Milwaukee PC <span class="work-title">Technician</span></dt><dd>1 year</dd></div>
-            <div><dt>Rockline</dt><dd>5 months</dd></div>
-            <div><dt>Bemis <span class="work-title">Production Assembler</span></dt><dd>4 years</dd></div>
-            <div><dt>Fountain Park Restaurant <span class="work-title">Assistant Manager</span></dt><dd>6 years</dd></div>
-          </dl>
-          <h2>Selected projects</h2>
-          <ul class="about-projects">
-            <li><strong>Computer deployments</strong><p>Imaged and deployed more than 1,000 computers across my IT roles.</p></li>
-            <li><strong>VA website</strong><p>Built a simple way for people to reach out and suggest a time to talk.</p></li>
-            <li><strong>DEUS ORDO website</strong><p>Built the public site and inquiry form for the brotherhood and its guests.</p></li>
-          </ul>
-          <h2>Skills</h2>
-          <ul class="about-skills">
-            <li>IT support and troubleshooting</li>
-            <li>Computer imaging and deployment</li>
-            <li>Network troubleshooting</li>
-            <li>Technical documentation</li>
-            <li>Team leadership</li>
-            <li>Operations and customer service</li>
-          </ul>
+          <p class="about-strengths">Practical experience. Personal connections. Follow-through.</p>
+          <p><a href="https://www.linkedin.com/in/vameti">View my background on LinkedIn <span aria-hidden="true">→</span></a></p>
         </div>
       </details>
     </section>
     <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1254" height="1254"></div>
-    <div class="matrix-trail" aria-hidden="true"></div>
-    <canvas class="ambient-eye" width="64" height="38" aria-hidden="true"></canvas>
   </main>
-  <script src="time-picker.js?v=956b2c15a818" defer></script>
-  <script src="script.js?v=c8665c6e17c2" defer></script>
-  <script src="matrix.js?v=2095cfff401c" defer></script>
-  <script src="ambient-eye.js?v=2b7bd51ddc8f" defer></script>
-  <script src="typewriter.js?v=23aa840864e7" defer></script>
+  <script src="time-picker.js?v=1efd9b33efb6" defer></script>
+  <script src="script.js?v=64a98c7fd4af" defer></script>
+  <script src="typewriter.js?v=c1694b3ef0aa" defer></script>
 </body>
 </html>

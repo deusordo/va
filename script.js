@@ -1,17 +1,29 @@
-const openButton=document.getElementById('open-form');
-const closeButton=document.getElementById('close-form');
-const panel=document.getElementById('contact-panel');
-const form=document.getElementById('contact-form');
-const status=document.getElementById('form-status');
+const openButton = document.getElementById('open-form');
+const closeButton = document.getElementById('close-form');
+const panel = document.getElementById('contact-panel');
+const form = document.getElementById('contact-form');
+const status = document.getElementById('form-status');
+const alternative = document.getElementById('form-alternative');
 const heading = document.getElementById('contact-heading');
 const confirmation = document.getElementById('contact-confirmation');
 const confirmationRequest = document.getElementById('confirmation-request');
 const confirmationTime = document.getElementById('confirmation-time');
 const message = form.elements.message;
+const nameInput = document.getElementById('contact-name');
 const meetingOptions = document.getElementById('meeting-options');
-const timePicker = createTimePicker(document.getElementById('time-request'));
+let timePicker;
 
 message.addEventListener('input', () => message.setCustomValidity(''));
+
+function withTimePicker(action) {
+  if (!timePicker) return;
+  try {
+    return action(timePicker);
+  } catch {
+    timePicker = undefined;
+    meetingOptions.hidden = true;
+  }
+}
 
 function focusConfirmation() {
   heading.focus({ preventScroll: true });
@@ -20,7 +32,7 @@ function focusConfirmation() {
 
 function showConfirmation(requestedTime) {
   form.reset();
-  timePicker.reset();
+  withTimePicker(picker => picker.reset());
   meetingOptions.open = false;
   status.textContent = '';
   heading.textContent = 'Message Received';
@@ -41,10 +53,9 @@ function toggleForm(open) {
     if (form.hidden) {
       focusConfirmation();
     } else {
-      timePicker.refresh();
-      const firstName = form.elements.first_name;
-      firstName.focus({ preventScroll: true });
-      firstName.scrollIntoView({ block: 'nearest' });
+      withTimePicker(picker => picker.refresh());
+      nameInput.focus({ preventScroll: true });
+      nameInput.scrollIntoView({ block: 'nearest' });
     }
   } else {
     if (!confirmation.hidden) {
@@ -56,47 +67,60 @@ function toggleForm(open) {
     openButton.focus();
   }
 }
-openButton.addEventListener('click',()=>toggleForm(panel.hidden));
-closeButton.addEventListener('click',()=>toggleForm(false));
+openButton.addEventListener('click', () => toggleForm(panel.hidden));
+closeButton.addEventListener('click', () => toggleForm(false));
 document.addEventListener('keydown', event => {
   if (event.key !== 'Escape' || event.isComposing || panel.hidden) return;
   event.preventDefault();
   toggleForm(false);
 });
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
+form.addEventListener('submit', async event => {
+  event.preventDefault();
   const submit = form.querySelector('[type=submit]');
   if (form.hidden || submit.disabled) return;
   status.textContent = '';
+  alternative.hidden = true;
   const messageText = message.value.trim();
   message.setCustomValidity(messageText ? '' : 'Tell me a little about what I can help you with.');
-  if (!form.reportValidity() || !timePicker.validate()) return;
+  if (!form.reportValidity() || withTimePicker(picker => picker.validate()) === false) return;
   const data = new FormData(form);
-  const firstName = form.elements.first_name.value.trim();
-  const lastName = form.elements.last_name.value.trim();
-  data.set('first_name', firstName);
-  data.set('last_name', lastName);
-  data.set('name', `${firstName} ${lastName}`);
+  data.set('name', nameInput.value.trim());
   const phone = form.elements.phone.value.trim();
   if (phone) data.set('phone', phone);
   else data.delete('phone');
-  const requestedTime = timePicker.append(data);
+  const requestedTime = withTimePicker(picker => picker.append(data));
   data.set('message', requestedTime
     ? `${messageText}\n\nPreferred date and time: ${requestedTime}`
     : messageText);
   submit.disabled = true;
   status.textContent = 'Sending…';
+  const request = new AbortController();
+  const timeout = setTimeout(() => request.abort(), 15000);
   try {
     const response = await fetch(form.action, {
       method: 'POST',
       body: data,
-      headers: { Accept: 'application/json' }
+      headers: { Accept: 'application/json' },
+      signal: request.signal
     });
     if (!response.ok) throw Error('send failed');
     showConfirmation(requestedTime);
   } catch {
-    status.textContent = 'Message could not be sent. Please try again later.';
+    status.textContent = request.signal.aborted
+      ? 'The request took too long to confirm. Your details are still here. You can try again.'
+      : 'Your message couldn’t be sent. Your details are still here. Please try again.';
+    alternative.hidden = false;
   } finally {
+    clearTimeout(timeout);
     submit.disabled = false;
   }
 });
+
+if (typeof createTimePicker === 'function') {
+  try {
+    timePicker = createTimePicker(document.getElementById('time-request'));
+    meetingOptions.hidden = false;
+  } catch {
+    meetingOptions.hidden = true;
+  }
+}

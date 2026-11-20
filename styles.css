@@ -122,7 +122,8 @@ h1 {
 .button:focus-visible,
 .close:focus-visible,
 .about-me summary:focus-visible,
-.about-links a:focus-visible,
+.about-content a:focus-visible,
+.form-alternative a:focus-visible,
 .meeting-options summary:focus-visible,
 .time-request button:focus-visible,
 input:focus-visible,
@@ -160,67 +161,20 @@ textarea:focus-visible {
 
 .about-content p { margin: 0; }
 
-.about-content .about-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem 1rem;
-  margin-top: .35rem;
+.about-content .about-strengths {
+  margin-top: .65rem;
+  color: #eeeef4;
+  font-weight: 600;
 }
 
-.about-links a {
+.about-content a {
   display: inline-flex;
   align-items: center;
+  gap: .45em;
   min-height: 2.75rem;
   color: #eeeef4;
   text-underline-offset: .2em;
 }
-
-.about-content h2 {
-  margin: 1rem 0 .45rem;
-  color: #eeeef4;
-  font-size: 1rem;
-}
-
-.work-history { margin: 0; }
-
-.work-history > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: .65rem;
-  padding-block: .55rem;
-  border-block-start: 1px solid #3c3c43;
-}
-
-.work-history dt {
-  color: #eeeef4;
-  overflow-wrap: anywhere;
-}
-
-.work-title {
-  display: block;
-  margin-top: .15rem;
-  color: #c5c5ca;
-  font-size: .86rem;
-}
-
-.work-history dd {
-  margin: 0;
-  white-space: nowrap;
-  text-align: end;
-  font-variant-numeric: tabular-nums;
-}
-
-.about-projects,
-.about-skills {
-  margin: 0;
-  padding-left: 1.1rem;
-}
-
-.about-projects li + li { margin-top: .6rem; }
-.about-projects strong { color: #eeeef4; }
-.about-projects p { margin-top: .15rem; }
-.about-skills li + li { margin-top: .25rem; }
 
 .portrait-wrap {
   position: absolute;
@@ -234,39 +188,6 @@ textarea:focus-visible {
   width: 100%;
   height: auto;
   mask-image: linear-gradient(to right, transparent, #000 20%);
-}
-
-.matrix-trail {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.ambient-eye {
-  position: fixed;
-  inset: 0 auto auto 0;
-  width: 64px;
-  height: 38px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.matrix-trail span {
-  position: absolute;
-  color: #a0dfbd;
-  opacity: 0;
-  font: 500 .8rem / 1 ui-monospace, monospace;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .matrix-trail span { animation: digit-fade .65s ease-out both; }
-
-  @keyframes digit-fade {
-    0% { opacity: 0; }
-    14% { opacity: .37; }
-    100% { opacity: 0; transform: translateY(5px); }
-  }
 }
 
 .contact-panel {
@@ -349,8 +270,14 @@ textarea:focus-visible {
   gap: .5rem;
 }
 
-.message-label {
-  margin-block-start: .25rem;
+.form-field {
+  display: grid;
+  align-content: start;
+  gap: .3rem;
+  min-width: 0;
+}
+
+.form-field label {
   font-size: .9rem;
   font-weight: 600;
 }
@@ -551,6 +478,8 @@ textarea {
   height: 0;
   margin-block-start: -.5rem;
 }
+
+.form-alternative a { color: #eeeef4; text-underline-offset: .2em; }
 
 .honeypot {
   position: absolute;

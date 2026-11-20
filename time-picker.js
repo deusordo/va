@@ -14,7 +14,7 @@ function createTimePicker(picker) {
   const selectedTimeText = picker.querySelector('#selected-time-text');
   const motion = matchMedia('(prefers-reduced-motion: no-preference)');
   const feedback = picker.querySelector('.time-feedback');
-  const clear = picker.querySelector('#clear-time');
+  const skip = picker.querySelector('#skip-time');
   const timeZone = 'America/Chicago';
 
   const centralClock = new Intl.DateTimeFormat('en-US', {
@@ -158,7 +158,6 @@ function createTimePicker(picker) {
     selectedTime = null;
     displayedMonth = centralNow().month;
     feedback.textContent = '';
-    clear.hidden = true;
     renderCalendar();
   }
 
@@ -192,7 +191,6 @@ function createTimePicker(picker) {
       selectedTime = null;
     }
     feedback.textContent = '';
-    clear.hidden = false;
     renderTimes();
     focusView(slots.querySelector('[aria-pressed="true"]') ?? dateLabel);
   });
@@ -203,9 +201,10 @@ function createTimePicker(picker) {
     renderTimes();
     focusView(slots.querySelector('[aria-pressed="true"]') ?? dateLabel);
   });
-  clear.addEventListener('click', () => {
+  skip.addEventListener('click', () => {
     reset();
-    focusView(days.querySelector('[tabindex="0"]') ?? next);
+    disclosure.open = false;
+    disclosure.querySelector('summary').focus();
   });
 
   slots.addEventListener('click', event => {
@@ -224,30 +223,31 @@ function createTimePicker(picker) {
       else renderCalendar();
     },
     validate() {
-      if (!selectedDate) return true;
+      if (selectedTime === null) return true;
       const choices = availableChoices(selectedDate, centralNow());
       if (choices.includes(selectedTime)) return true;
       disclosure.open = true;
       if (choices.length) {
         selectedTime = null;
         renderTimes();
-        feedback.textContent = 'Choose a time or clear your suggestion.';
+        feedback.textContent = 'Choose another time or skip scheduling.';
         focusView(slots.querySelector('button'));
       } else {
         reset();
-        feedback.textContent = 'Please choose a later date.';
+        feedback.textContent = 'Choose a later date or skip scheduling.';
         focusView(days.querySelector('[tabindex="0"]') ?? next);
       }
       return false;
     },
     append(data) {
       if (selectedTime === null) return null;
+      const requestedTime = describeSlot();
       const hours = String(Math.floor(selectedTime / 60)).padStart(2, '0');
       const minutes = String(selectedTime % 60).padStart(2, '0');
       data.set('preferred_date', selectedDate);
       data.set('preferred_time', `${hours}:${minutes}`);
       data.set('preferred_time_zone', timeZone);
-      return describeSlot();
+      return requestedTime;
     },
     reset
   };
