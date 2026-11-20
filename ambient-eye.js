@@ -7,7 +7,7 @@
 
   const portrait = document.querySelector(".portrait-wrap");
   const heading = document.querySelector("#page-title");
-  const button = document.querySelector("#open-form");
+  const about = document.querySelector(".about-me");
   const panel = document.querySelector("#contact-panel");
   const motion = matchMedia("(prefers-reduced-motion: no-preference) and (any-pointer: fine) and (any-hover: hover)");
   const width = 64;
@@ -40,7 +40,7 @@
 
     return [
       { left, right, top: gap, bottom: heading.getBoundingClientRect().top - height - gap },
-      { left, right, top: button.getBoundingClientRect().bottom + gap, bottom: innerHeight - height - gap }
+      { left, right, top: about.getBoundingClientRect().bottom + gap, bottom: innerHeight - height - gap }
     ].filter(area => area.top <= area.bottom);
   }
 
@@ -118,6 +118,7 @@
   window.addEventListener("scroll", stop, { passive: true });
   document.addEventListener("visibilitychange", stop);
   motion.addEventListener("change", stop);
+  about.addEventListener("toggle", stop);
   new MutationObserver(() => { if (!panel.hidden) stop(); }).observe(panel, {
     attributes: true,
     attributeFilter: ["hidden"]
