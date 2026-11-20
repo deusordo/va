@@ -26,7 +26,7 @@ body {
   z-index: 1;
   width: min(48vw, 48rem);
   margin-inline-start: 7vw;
-  padding-block: clamp(4.5rem, 16svh, 10rem) 3rem;
+  padding-block-start: clamp(4.5rem, 16svh, 10rem);
 }
 
 h1 {
@@ -121,8 +121,8 @@ h1 {
 
 .button:focus-visible,
 .close:focus-visible,
-.about-me summary:focus-visible,
-.about-content a:focus-visible,
+.portfolio button:focus-visible,
+.portfolio a:focus-visible,
 .form-alternative a:focus-visible,
 .meeting-options summary:focus-visible,
 .time-request button:focus-visible,
@@ -138,42 +138,102 @@ textarea:focus-visible {
   flex: none;
 }
 
-.about-me {
-  width: min(100%, 22.4rem);
-  margin-block-start: 1.15rem;
-  border-block-start: 1px solid #54545d;
+.portfolio {
+  position: relative;
+  z-index: 1;
+  width: min(43vw, 33rem);
+  margin-inline-start: 7vw;
+  padding-block: .95rem 3rem;
   color: #c5c5ca;
-  font-size: .95rem;
-}
-
-.about-me summary {
-  min-height: 2.75rem;
-  padding: .72rem .15rem;
-  color: #eeeef4;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.about-content {
-  padding: .25rem .15rem 0;
+  font-size: .9rem;
   line-height: 1.45;
 }
 
-.about-content p { margin: 0; }
-
-.about-content .about-strengths {
-  margin-top: .65rem;
-  color: #eeeef4;
-  font-weight: 600;
+.portfolio-pills:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: .35rem;
+  margin-inline: -.35rem;
 }
 
-.about-content a {
-  display: inline-flex;
-  align-items: center;
-  gap: .45em;
+.portfolio-pills button {
+  flex: none;
   min-height: 2.75rem;
+  padding: .45rem .6rem;
+  border: 1px solid #777780;
+  border-radius: 999px;
   color: #eeeef4;
-  text-underline-offset: .2em;
+  background: #242429;
+  font: 600 .85rem / 1.2 Arial, Helvetica, sans-serif;
+  -webkit-tap-highlight-color: #ffffff1a;
+  cursor: pointer;
+}
+
+.portfolio :is(button, a):focus-visible { outline-color: #e3e3e8; }
+
+.portfolio-pills button[aria-expanded="true"] {
+  border-color: #dddde5;
+  color: #fff;
+  background: #3b3b43;
+}
+
+@media (hover: hover) {
+  .portfolio-pills button:hover { border-color: #dddde5; }
+}
+
+.portfolio-panel {
+  margin-block-start: .6rem;
+  padding: .85rem 0 .3rem;
+  border-block-start: 1px solid #54545d;
+  overflow-wrap: anywhere;
+}
+
+.portfolio-panel :is(h2, h3, strong, dt) { color: #f4f4f7; }
+.portfolio-panel h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.portfolio-panel h3 { margin: .9rem 0 .4rem; font-size: .9rem; }
+.portfolio-panel p { margin: 0; }
+.portfolio-panel p + p { margin-block-start: .5rem; }
+.portfolio-panel :is(dl, ul) { margin: 0; padding: 0; }
+.portfolio-panel ul { list-style: none; }
+.portfolio-panel a { color: #f4f4f7; text-underline-offset: .2em; }
+
+.connection-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2rem 1.25rem;
+}
+
+.connection-links a { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; }
+.connection-links svg { flex: none; }
+
+.work-history div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .45rem .8rem;
+}
+
+.work-history dt { font-weight: 600; }
+.work-history dt span { display: block; color: #c5c5ca; font-weight: 400; }
+.work-history dd { flex: none; margin: 0; font-size: .8rem; text-align: end; }
+.work-history div, .portfolio-projects li { padding-block: .55rem; }
+.work-history div + div, .portfolio-projects li + li { border-block-start: 1px solid #ffffff24; }
+
+.portfolio-skills { display: flex; flex-wrap: wrap; gap: .4rem; }
+.portfolio-skills li {
+  padding: .28rem .65rem;
+  border: 1px solid #5a5a65;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .portfolio-pills button { transition: border-color .15s, background-color .15s; }
+  .portfolio-pills:not([hidden]) ~ .portfolio-panel:not([hidden]) { animation: portfolio-reveal .18s ease-out; }
+
+  @keyframes portfolio-reveal {
+    from { opacity: 0; }
+  }
 }
 
 .portrait-wrap {
@@ -535,5 +595,19 @@ textarea {
 
   .portrait-wrap img {
     mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 83%, transparent);
+  }
+
+  .portfolio {
+    width: 100%;
+    max-width: 34rem;
+    margin-inline: auto;
+    padding: .15rem clamp(1rem, 5vw, 1.5rem) 2rem;
+  }
+
+  .portfolio-pills:not([hidden]) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #777780 transparent;
   }
 }

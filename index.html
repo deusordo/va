@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://deusordo.github.io/va/social-preview.jpg">
   <meta name="twitter:image:alt" content="Vullnet Ameti’s illustrated portrait beside the words Let’s Connect">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="stylesheet" href="styles.css?v=6f395cb68f54">
+  <link rel="stylesheet" href="styles.css?v=f4440a51c1a8">
 </head>
 <body>
   <main class="hero">
@@ -115,19 +115,82 @@
           </div>
         </div>
       </section>
-      <details class="about-me">
-        <summary>A little about me</summary>
-        <div class="about-content">
-          <p>I’m Vullnet Ameti. I’ve supported healthcare teams, managed businesses, and worked on the production floor. I enjoy solving practical problems and connecting people who can help each other.</p>
-          <p class="about-strengths">Practical experience. Personal connections. Follow-through.</p>
-          <p><a href="https://www.linkedin.com/in/vameti">View my background on LinkedIn <span aria-hidden="true">→</span></a></p>
-        </div>
-      </details>
     </section>
     <div class="portrait-wrap"><img src="portrait.jpg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1254" height="1254"></div>
+    <section class="portfolio" aria-label="Portfolio">
+      <div class="portfolio-pills" role="group" aria-label="Portfolio sections" hidden>
+        <button type="button" id="pill-connections" aria-controls="portfolio-connections" aria-expanded="false">Connections</button>
+        <button type="button" id="pill-experience" aria-controls="portfolio-experience" aria-expanded="false">Experience</button>
+        <button type="button" id="pill-projects" aria-controls="portfolio-projects" aria-expanded="false">Projects</button>
+        <button type="button" id="pill-skills" aria-controls="portfolio-skills" aria-expanded="false">Skills</button>
+        <button type="button" id="pill-education" aria-controls="portfolio-education" aria-expanded="false">Education</button>
+        <button type="button" id="pill-about" aria-controls="portfolio-about" aria-expanded="false">About</button>
+      </div>
+      <section class="portfolio-panel" id="portfolio-connections" aria-labelledby="connections-heading">
+        <h2 id="connections-heading">Connections</h2>
+        <ul class="connection-links">
+          <li>
+            <a href="https://www.linkedin.com/in/vameti" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8 10H6v8h2v-8ZM7 6.1a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Zm8.4 3.7c-1.1 0-1.9.5-2.4 1.2v-1h-2v8h2v-4.4c0-1 .5-1.7 1.5-1.7s1.5.7 1.5 1.7V18h2v-4.8c0-2-1-3.4-2.6-3.4Z"/></svg>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=61583661305704" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.5V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.7-1.6 1.5V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg>
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="portfolio-panel" id="portfolio-experience" aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Experience</h2>
+        <dl class="work-history">
+          <div><dt>Advocate Health <span>IT Technical Support Administrator II</span></dt><dd>3+ years</dd></div>
+          <div><dt>Brooksource <span>IT Field Technician</span></dt><dd>10 months</dd></div>
+          <div><dt>Illyria Capital <span>Operations Analyst</span></dt><dd>3 months</dd></div>
+          <div><dt>xCell Mobile / Planet Wireless <span>General Manager</span></dt><dd>2 years, 7 months</dd></div>
+          <div><dt>Milwaukee PC <span>Technician</span></dt><dd>1 year</dd></div>
+          <div><dt>Rockline</dt><dd>5 months</dd></div>
+          <div><dt>Bemis <span>Production Assembler</span></dt><dd>4 years</dd></div>
+          <div><dt>Fountain Park Restaurant <span>Assistant Manager</span></dt><dd>6 years</dd></div>
+        </dl>
+      </section>
+      <section class="portfolio-panel" id="portfolio-projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <ul class="portfolio-projects">
+          <li><strong>Computer deployments</strong><p>Imaged and deployed more than 1,000 computers across my IT roles.</p></li>
+          <li><strong><a href="https://deusordo.github.io/va/" target="_blank" rel="noopener noreferrer">VA website</a></strong><p>Built a simple way for people to reach out and suggest a time to talk.</p></li>
+          <li><strong><a href="https://deusordo.github.io/men/" target="_blank" rel="noopener noreferrer">DEUS ORDO website</a></strong><p>Built the public site and inquiry form for the brotherhood and its guests.</p></li>
+        </ul>
+      </section>
+      <section class="portfolio-panel" id="portfolio-skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills</h2>
+        <ul class="portfolio-skills">
+          <li>IT support and troubleshooting</li>
+          <li>Computer imaging and deployment</li>
+          <li>Network troubleshooting</li>
+          <li>Technical documentation</li>
+          <li>Team leadership</li>
+          <li>Operations and customer service</li>
+        </ul>
+      </section>
+      <section class="portfolio-panel" id="portfolio-education" aria-labelledby="education-heading">
+        <h2 id="education-heading">Education</h2>
+        <p><strong>Associate of Applied Science in Cybersecurity</strong><br>Lakeshore Technical College · Completed</p>
+        <h3>Professional Certifications</h3>
+        <p><strong>CompTIA A+</strong><br>Certification earned</p>
+      </section>
+      <section class="portfolio-panel" id="portfolio-about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>I’m Vullnet Ameti. I’ve supported healthcare teams, managed businesses, and worked on the production floor. I enjoy solving practical problems and connecting people who can help each other.</p>
+        <p><strong>Practical experience. Personal connections. Follow-through.</strong></p>
+      </section>
+    </section>
   </main>
   <script src="time-picker.js?v=1efd9b33efb6" defer></script>
   <script src="script.js?v=64a98c7fd4af" defer></script>
   <script src="typewriter.js?v=c1694b3ef0aa" defer></script>
+  <script src="portfolio.js?v=2c6a800818fe" defer></script>
 </body>
 </html>
