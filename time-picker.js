@@ -1,4 +1,5 @@
 function createTimePicker(picker) {
+  const disclosure = picker.closest('details');
   const calendar = picker.querySelector('.calendar-view');
   const monthLabel = picker.querySelector('#preferred-month');
   const previous = picker.querySelector('#previous-month');
@@ -226,6 +227,7 @@ function createTimePicker(picker) {
       if (!selectedDate) return true;
       const choices = availableChoices(selectedDate, centralNow());
       if (choices.includes(selectedTime)) return true;
+      disclosure.open = true;
       if (choices.length) {
         selectedTime = null;
         renderTimes();

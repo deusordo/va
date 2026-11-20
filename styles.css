@@ -64,7 +64,7 @@ h1 {
   clip-path: inset(50%);
 }
 
-.tagline-word {
+.tagline-animated {
   white-space: nowrap;
 }
 
@@ -79,6 +79,8 @@ h1 {
     content: "";
     animation: tagline-caret 1s step-end infinite;
   }
+
+  .tagline-is-paused .tagline-word::after { animation-play-state: paused; }
 
   @keyframes tagline-caret {
     50% { opacity: 0; }
@@ -119,6 +121,7 @@ h1 {
 
 .button:focus-visible,
 .close:focus-visible,
+.meeting-options summary:focus-visible,
 .time-request button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
@@ -178,6 +181,14 @@ textarea:focus-visible {
   border-radius: 1.2rem;
   background: #17171be8;
   box-shadow: 0 12px 36px #0003;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-panel:not([hidden]) { animation: contact-reveal .22s ease-out; }
+
+  @keyframes contact-reveal {
+    from { opacity: 0; }
+  }
 }
 
 .panel-heading {
@@ -242,17 +253,33 @@ textarea:focus-visible {
   gap: .5rem;
 }
 
+.message-label {
+  margin-block-start: .25rem;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.meeting-options {
+  margin-block-start: .25rem;
+  border-block: 1px solid #54545d;
+  color: #e1e1e5;
+}
+
+.meeting-options summary {
+  min-height: 2.75rem;
+  padding-block: .78rem;
+  font-size: .9rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
 .time-request {
   min-width: 0;
-  margin: .35rem 0 0;
-  padding: .35rem 0 0;
+  margin: 0;
+  padding: 0 0 .75rem;
   border: 0;
   color: #d8d8db;
   font-size: .9rem;
-}
-
-.time-request legend {
-  font-weight: 600;
 }
 
 .time-request button {
@@ -366,6 +393,15 @@ textarea:focus-visible {
   line-height: 1.4;
 }
 
+#time-hours { margin: 0 0 .5rem; }
+
+.form-privacy {
+  margin: .2rem 0 0;
+  color: #c5c5ca;
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
 .field-label {
   position: absolute;
   width: 1px;
@@ -430,7 +466,7 @@ textarea {
     width: auto;
     max-width: 34rem;
     margin-inline: auto;
-    padding: 2.75rem 1.5rem 1.5rem;
+    padding: clamp(2rem, 5.5svh, 2.75rem) clamp(1rem, 5vw, 1.5rem) 1.15rem;
   }
 
   h1 {
@@ -452,7 +488,9 @@ textarea {
   input,
   textarea {
     min-height: 2.75rem;
+    padding-inline: .55rem;
     font-size: 1rem;
+    scroll-margin-block: 1rem;
   }
 
   textarea {
@@ -466,7 +504,7 @@ textarea {
   .portrait-wrap {
     position: relative;
     inset: auto;
-    width: min(100%, 40rem);
+    width: min(100%, 34rem);
     margin-inline: auto;
   }
 

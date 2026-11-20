@@ -5,7 +5,7 @@
   const animated = tagline.querySelector(".tagline-animated");
   const wordSlot = animated.querySelector(".tagline-word");
   const motion = matchMedia("(prefers-reduced-motion: no-preference)");
-  const words = ["talk.", "connect.", "explore.", "collaborate.", "build.", "create.", "solve.", "improve."];
+  const words = ["talk.", "connect.", "explore.", "collaborate.", "build.", "solve."];
   let index = 0;
   let letters = words[0].length;
   let deleting = true;
@@ -15,6 +15,11 @@
   function schedule() {
     clearTimeout(timer);
     if (motion.matches && !document.hidden) timer = setTimeout(advance, delay);
+  }
+
+  function updateVisibility() {
+    tagline.classList.toggle("tagline-is-paused", document.hidden);
+    schedule();
   }
 
   function advance() {
@@ -39,10 +44,10 @@
   function updateMotion() {
     tagline.classList.toggle("tagline-is-animated", motion.matches);
     animated.hidden = !motion.matches;
-    schedule();
+    updateVisibility();
   }
 
   motion.addEventListener("change", updateMotion);
-  document.addEventListener("visibilitychange", schedule);
+  document.addEventListener("visibilitychange", updateVisibility);
   updateMotion();
 })();
