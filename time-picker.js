@@ -7,6 +7,11 @@ function createTimePicker(picker) {
   const timeView = picker.querySelector('.time-view');
   const dateLabel = picker.querySelector('#chosen-date');
   const slots = picker.querySelector('.time-slots');
+  const selectionView = picker.querySelector('.selection-view');
+  const selectionHeading = picker.querySelector('#selection-heading');
+  const selectedDateText = picker.querySelector('#selected-date-text');
+  const selectedTimeText = picker.querySelector('#selected-time-text');
+  const motion = matchMedia('(prefers-reduced-motion: no-preference)');
   const feedback = picker.querySelector('.time-feedback');
   const clear = picker.querySelector('#clear-time');
   const timeZone = 'America/Chicago';
@@ -53,6 +58,15 @@ function createTimePicker(picker) {
     return button;
   }
 
+  function showView(view) {
+    for (const stage of [calendar, timeView, selectionView]) stage.hidden = stage !== view;
+  }
+
+  function focusView(element) {
+    element.focus({ preventScroll: true });
+    element.scrollIntoView({ block: 'nearest', behavior: motion.matches ? 'smooth' : 'instant' });
+  }
+
   function renderCalendar() {
     const now = centralNow();
     if (displayedMonth < now.month) displayedMonth = now.month;
@@ -90,8 +104,7 @@ function createTimePicker(picker) {
     const entry = selectedButton ?? firstAvailable;
     if (entry) entry.tabIndex = 0;
     days.replaceChildren(...cells);
-    timeView.hidden = true;
-    calendar.hidden = false;
+    showView(calendar);
   }
 
   function formatTime(minutes) {
@@ -107,8 +120,31 @@ function createTimePicker(picker) {
       return button;
     });
     slots.replaceChildren(...choices);
-    calendar.hidden = true;
-    timeView.hidden = false;
+    showView(timeView);
+  }
+
+  function describeDate() {
+    return fullDate.format(new Date(`${selectedDate}T00:00:00Z`));
+  }
+
+  function describeTime() {
+    return `${formatTime(selectedTime)} Central Time`;
+  }
+
+  function describeSlot() {
+    return `${describeDate()} at ${describeTime()}`;
+  }
+
+  function renderSelection() {
+    selectedDateText.textContent = describeDate();
+    selectedTimeText.textContent = describeTime();
+    showView(selectionView);
+  }
+
+  function returnToCalendar() {
+    renderCalendar();
+    feedback.textContent = selectedTime === null ? '' : `Selected: ${describeSlot()}.`;
+    focusView(days.querySelector('[tabindex="0"]') ?? next);
   }
 
   function moveMonth(step) {
@@ -153,49 +189,52 @@ function createTimePicker(picker) {
     if (button.value !== selectedDate) {
       selectedDate = button.value;
       selectedTime = null;
-      feedback.textContent = '';
     }
+    feedback.textContent = '';
     clear.hidden = false;
     renderTimes();
-    dateLabel.focus();
+    focusView(slots.querySelector('[aria-pressed="true"]') ?? dateLabel);
   });
 
-  picker.querySelector('#back-to-dates').addEventListener('click', () => {
-    renderCalendar();
-    (days.querySelector('[tabindex="0"]') ?? next).focus();
+  picker.querySelector('#back-to-dates').addEventListener('click', returnToCalendar);
+  picker.querySelector('#change-date').addEventListener('click', returnToCalendar);
+  picker.querySelector('#change-time').addEventListener('click', () => {
+    renderTimes();
+    focusView(slots.querySelector('[aria-pressed="true"]') ?? dateLabel);
   });
   clear.addEventListener('click', () => {
     reset();
-    (days.querySelector('[tabindex="0"]') ?? next).focus();
+    focusView(days.querySelector('[tabindex="0"]') ?? next);
   });
 
   slots.addEventListener('click', event => {
     const button = event.target.closest('button');
     if (!button) return;
     selectedTime = Number(button.value);
-    for (const choice of slots.querySelectorAll('button')) {
-      choice.setAttribute('aria-pressed', String(choice === button));
-    }
-    feedback.textContent = `${dateLabel.textContent} at ${button.textContent} CT selected.`;
+    feedback.textContent = '';
+    renderSelection();
+    focusView(selectionHeading);
   });
 
   return {
     refresh() {
-      if (timeView.hidden) renderCalendar();
-      else renderTimes();
+      if (!selectionView.hidden) renderSelection();
+      else if (!timeView.hidden) renderTimes();
+      else renderCalendar();
     },
     validate() {
       if (!selectedDate) return true;
       const choices = availableChoices(selectedDate, centralNow());
       if (choices.includes(selectedTime)) return true;
       if (choices.length) {
+        selectedTime = null;
         renderTimes();
         feedback.textContent = 'Choose a time or clear your suggestion.';
-        slots.querySelector('button').focus();
+        focusView(slots.querySelector('button'));
       } else {
         reset();
         feedback.textContent = 'Please choose a later date.';
-        (days.querySelector('[tabindex="0"]') ?? next).focus();
+        focusView(days.querySelector('[tabindex="0"]') ?? next);
       }
       return false;
     },
@@ -206,8 +245,7 @@ function createTimePicker(picker) {
       data.set('preferred_date', selectedDate);
       data.set('preferred_time', `${hours}:${minutes}`);
       data.set('preferred_time_zone', timeZone);
-      const date = fullDate.format(new Date(`${selectedDate}T00:00:00Z`));
-      return `${date} at ${formatTime(selectedTime)} Central Time`;
+      return describeSlot();
     },
     reset
   };

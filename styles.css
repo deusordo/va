@@ -303,6 +303,44 @@ form {
   scrollbar-color: #666671 #242428;
 }
 
+.selection-view {
+  padding: .85rem;
+  border: 1px solid #65656d;
+  border-radius: .65rem;
+  background: #202025;
+}
+
+.selection-view h3 {
+  margin: 0 0 .3rem;
+  font-size: .875rem;
+}
+
+.selection-view p {
+  margin: 0 0 .75rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.selection-view p span { display: block; }
+#selected-time-text { font-weight: 650; }
+
+.selection-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.selection-actions button { padding-inline: .65rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .picker-view:not([hidden]) { animation: picker-enter .4s ease-out both; }
+
+  @keyframes picker-enter {
+    from { opacity: 0; transform: translateY(.35rem); }
+  }
+}
+
 .time-choice {
   justify-content: space-between;
   margin-top: .35rem;
