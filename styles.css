@@ -123,6 +123,7 @@ h1 {
 .close:focus-visible,
 .portfolio button:focus-visible,
 .portfolio a:focus-visible,
+.link-hub a:focus-visible,
 .form-alternative a:focus-visible,
 .meeting-options summary:focus-visible,
 .time-request button:focus-visible,
@@ -207,7 +208,47 @@ textarea:focus-visible {
 .connection-links a { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; }
 .connection-links svg { flex: none; }
 
-.work-history div {
+.link-hub {
+  width: min(100%, 22.4rem);
+  margin: 0 0 1.75rem;
+}
+
+.link-hub section + section {
+  margin-block-start: .85rem;
+  padding-block-start: .75rem;
+  border-block-start: 1px solid #54545d;
+}
+
+.link-hub h2 {
+  margin: 0;
+  color: #f4f4f7;
+  font-size: .95rem;
+}
+
+.hub-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hub-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2.75rem;
+  color: #f4f4f7;
+  text-underline-offset: .2em;
+}
+
+.hub-links svg { flex: none; }
+
+.hub-note {
+  margin: 0;
+  color: #acacb4;
+  font-size: .85rem;
+}
+
+.job-heading {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -217,6 +258,11 @@ textarea:focus-visible {
 .work-history dt { font-weight: 600; }
 .work-history dt span { display: block; color: #c5c5ca; font-weight: 400; }
 .work-history dd { flex: none; margin: 0; font-size: .8rem; text-align: end; }
+.job-line {
+  margin: .25rem 0 0;
+  color: #c5c5ca;
+  font-size: .85rem;
+}
 .work-history div, .portfolio-projects li { padding-block: .55rem; }
 .work-history div + div, .portfolio-projects li + li { border-block-start: 1px solid #ffffff24; }
 
