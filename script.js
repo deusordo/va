@@ -124,3 +124,5 @@ if (typeof createTimePicker === 'function') {
     meetingOptions.hidden = true;
   }
 }
+
+if (location.hash === '#open-form') toggleForm(true);
