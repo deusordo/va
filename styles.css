@@ -208,45 +208,25 @@ textarea:focus-visible {
 .connection-links a { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; }
 .connection-links svg { flex: none; }
 
-.link-hub {
-  width: min(100%, 22.4rem);
-  margin: 0 0 1.75rem;
-}
-
-.link-hub section + section {
-  margin-block-start: .85rem;
-  padding-block-start: .75rem;
-  border-block-start: 1px solid #54545d;
-}
-
-.link-hub h2 {
-  margin: 0;
-  color: #f4f4f7;
-  font-size: .95rem;
-}
-
+.link-hub { margin-block-start: .75rem; }
 .hub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 .9rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
 .hub-links a {
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
+  gap: .35rem;
   min-height: 2.75rem;
   color: #f4f4f7;
+  font-size: .875rem;
   text-underline-offset: .2em;
 }
-
 .hub-links svg { flex: none; }
-
-.hub-note {
-  margin: 0;
-  color: #acacb4;
-  font-size: .85rem;
-}
 
 .job-heading {
   display: flex;
@@ -713,9 +693,9 @@ textarea {
 @media (max-width: 760px) {
   :root[data-theme="light"] .portrait-wrap img { mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 83%, transparent); }
 }
-:root[data-theme="light"] :is(.tagline, .portfolio-panel :is(h2, h3, strong, dt, a), .link-hub h2, .hub-links a, #confirmation-request strong, .form-alternative a, .selection-view p) { color: #17171c; }
-:root[data-theme="light"] :is(.intro-copy, .portfolio, .work-history dt span, .job-line, .project-status, .project-skills, .hub-note, .calendar-week, .time-help, .form-privacy, .status, .contact-confirmation, .time-request, .meeting-options) { color: var(--va-body); }
-:root[data-theme="light"] :is(.portfolio-panel, .link-hub section + section, .work-history div + div, .portfolio-projects li + li, .meeting-options) { border-color: var(--va-line); }
+:root[data-theme="light"] :is(.tagline, .portfolio-panel :is(h2, h3, strong, dt, a), .hub-links a, #confirmation-request strong, .form-alternative a, .selection-view p) { color: #17171c; }
+:root[data-theme="light"] :is(.intro-copy, .portfolio, .work-history dt span, .job-line, .project-status, .project-skills, .calendar-week, .time-help, .form-privacy, .status, .contact-confirmation, .time-request, .meeting-options) { color: var(--va-body); }
+:root[data-theme="light"] :is(.portfolio-panel, .work-history div + div, .portfolio-projects li + li, .meeting-options) { border-color: var(--va-line); }
 :root[data-theme="light"] :is(.portfolio-pills button, .time-request button, .selection-view, input, textarea) { color: #17171c; background: var(--va-field); }
 :root[data-theme="light"] :is(input, textarea)::placeholder { color: var(--va-body); }
 :root[data-theme="light"] .portfolio-pills button[aria-expanded="true"], :root[data-theme="light"] .time-request button[aria-pressed="true"] { color: #fff; background: #2c2c34; border-color: #2c2c34; }
