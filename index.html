@@ -24,7 +24,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=20261123va">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <script src="./theme.js"></script>
-  <link rel="stylesheet" href="styles.css?v=20261123editorial">
+  <link rel="stylesheet" href="styles.css?v=20261123projects">
 </head>
 <body>
   <main class="hero" aria-label="Vullnet Ameti | Personal Portfolio">
@@ -47,7 +47,10 @@
         <p>Have a project, technical problem, or opportunity in mind? Tell me what you’re working on.</p>
       </div>
       <div class="rule" aria-hidden="true"></div>
-      <button id="open-form" class="button" type="button" aria-expanded="false" aria-controls="contact-panel">Let’s Connect <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
+      <div class="hero-actions">
+        <button id="open-form" class="button" type="button" aria-expanded="false" aria-controls="contact-panel">Let’s Connect <img class="icon" src="arrow-right.svg" alt="" aria-hidden="true"></button>
+        <a class="featured-link" href="#project">Featured work</a>
+      </div>
       <section id="contact-panel" class="contact-panel" aria-labelledby="contact-heading" hidden>
         <div class="panel-heading"><h2 id="contact-heading" tabindex="-1">Let’s Connect</h2><button id="close-form" type="button" class="close" aria-label="Close contact form"><img class="icon" src="x.svg" alt="" aria-hidden="true"></button></div>
         <form id="contact-form" method="POST" action="https://formspree.io/f/xwloqyor">
@@ -67,7 +70,8 @@
           </div>
           <div class="form-field">
             <label for="message">What can I help you with?</label>
-            <textarea id="message" name="message" rows="3" maxlength="5000" required placeholder="Tell me a little about your idea, challenge, or what you need help with."></textarea>
+            <p class="form-privacy" id="message-help">Include your goal and any deadline. Leave out passwords, private records, and confidential work material.</p>
+            <textarea id="message" name="message" rows="3" maxlength="5000" aria-describedby="message-help" required placeholder="Tell me a little about your idea, challenge, or what you need help with."></textarea>
           </div>
           <details class="meeting-options" id="meeting-options" hidden>
             <summary>Suggest a meeting time (optional)</summary>
@@ -151,6 +155,13 @@
     </section>
     <div class="portrait-wrap"><img src="portrait.svg" alt="Illustrated portrait of Vullnet Ameti wearing a dark suit" width="1000" height="1000"></div>
     <section class="portfolio" aria-label="Portfolio">
+      <section class="portfolio-panel featured-work" id="project" aria-labelledby="featured-heading" tabindex="-1">
+        <h2 id="featured-heading">Featured work</h2>
+        <h3>The NuTerra project sites</h3>
+        <p>A group of independent projects needed a clear way to show how their work connects and where each one stands.</p>
+        <p>The public site gives each project a focused page and connects them through one project map. Visitors can follow links directly to NuMind, VATRA, DEUS ORDO, and VIO, or read about SOURCE in the ecosystem overview.</p>
+        <a class="portfolio-link" href="../NuTerra/#ecosystem">Explore the project map</a>
+      </section>
       <div class="portfolio-pills" role="group" aria-label="Portfolio sections" hidden>
         <button type="button" id="pill-experience" aria-controls="portfolio-experience" aria-expanded="false">Experience</button>
         <button type="button" id="pill-projects" aria-controls="portfolio-projects" aria-expanded="false">Projects</button>
@@ -314,6 +325,16 @@
         <h2 id="about-heading">About</h2>
         <p>I’m Vullnet Ameti. I work in IT support and help desk roles, and I’ve also managed businesses and worked on the production floor. I enjoy solving practical problems and connecting people who can help each other.</p>
         <p><strong>Practical experience. Personal connections. Follow-through.</strong></p>
+      </section>
+      <section class="portfolio-panel" id="questions" aria-labelledby="contact-questions-heading">
+        <h2 id="contact-questions-heading">Questions before reaching out</h2>
+        <h3>What can I get in touch about?</h3>
+        <p>IT projects, technical problems, and opportunities to collaborate are welcome. A short note about your goal and anything you’ve already tried gives me a useful place to start.</p>
+        <h3>Do I have to choose a meeting time?</h3>
+        <p>You can send a message on its own or suggest a time in the form. If we decide to meet, we’ll confirm a time in a follow-up.</p>
+        <h3>How do I know my message went through?</h3>
+        <p>The form shows a confirmation after a successful submission. If it can’t confirm delivery, it keeps your draft and offers LinkedIn as an alternative.</p>
+        <a class="portfolio-link" href="#open-form">Back to contact</a>
       </section>
     </section>
     <div class="matrix-trail" aria-hidden="true"></div>

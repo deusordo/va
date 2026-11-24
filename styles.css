@@ -94,6 +94,10 @@ h1 {
   background: #bdbdc0;
 }
 
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem 1rem; }
+.featured-link, .portfolio-link { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.featured-link { color: inherit; font-size: .875rem; text-underline-offset: .2em; }
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -123,6 +127,7 @@ h1 {
 .close:focus-visible,
 .portfolio button:focus-visible,
 .portfolio a:focus-visible,
+.featured-link:focus-visible,
 .link-hub a:focus-visible,
 .form-alternative a:focus-visible,
 .meeting-options summary:focus-visible,
@@ -198,6 +203,8 @@ textarea:focus-visible {
 .portfolio-panel :is(dl, ul) { margin: 0; padding: 0; }
 .portfolio-panel ul { list-style: none; }
 .portfolio-panel a { color: #f4f4f7; text-underline-offset: .2em; }
+.featured-work { margin-block: 0 .85rem; }
+.featured-work h3 { margin-top: .6rem; }
 
 .connection-links {
   display: flex;
