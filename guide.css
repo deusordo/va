@@ -77,6 +77,12 @@ td, th { text-align: start; padding: .4rem .5rem; border-block-end: 1px solid va
 .work-history > div, .portfolio-projects > li { border-block-end: 1px solid var(--line); padding: .5rem 0; }
 .work-history dt { font-weight: 700; }
 .work-history dd { margin: .25rem 0; }
+.work-sample { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .72fr); align-items: start; gap: 1rem; }
+.work-sample figure { max-width: 16rem; margin: 0; padding: .55rem; }
+.work-sample img { display: block; width: 100%; height: auto; }
+@media (max-width: 540px) {
+  .work-sample { grid-template-columns: minmax(0, 1fr); }
+}
 @media (max-width: 680px) { .layout { grid-template-columns: minmax(0, 1fr); gap: .6rem; } .diagram { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media print {
   @page { size: Letter; margin: .56in; }
