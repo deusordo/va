@@ -11,9 +11,11 @@ const confirmationTime = document.getElementById('confirmation-time');
 const message = form.elements.message;
 const nameInput = document.getElementById('contact-name');
 const meetingOptions = document.getElementById('meeting-options');
+const formTitle = heading.textContent;
 let timePicker;
 
 message.addEventListener('input', () => message.setCustomValidity(''));
+nameInput.addEventListener('input', () => nameInput.setCustomValidity(''));
 
 function withTimePicker(action) {
   if (!timePicker) return;
@@ -54,14 +56,14 @@ function toggleForm(open) {
       focusConfirmation();
     } else {
       withTimePicker(picker => picker.refresh());
-      nameInput.focus({ preventScroll: true });
-      nameInput.scrollIntoView({ block: 'nearest' });
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ block: 'nearest' });
     }
   } else {
     if (!confirmation.hidden) {
       confirmation.hidden = true;
       form.hidden = false;
-      heading.textContent = 'Let’s Connect';
+      heading.textContent = formTitle;
       heading.removeAttribute('aria-describedby');
     }
     openButton.focus();
@@ -81,10 +83,12 @@ form.addEventListener('submit', async event => {
   status.textContent = '';
   alternative.hidden = true;
   const messageText = message.value.trim();
+  const name = nameInput.value.trim();
+  nameInput.setCustomValidity(name ? '' : 'Enter the name you’d like me to use.');
   message.setCustomValidity(messageText ? '' : 'Tell me a little about what I can help you with.');
   if (!form.reportValidity() || withTimePicker(picker => picker.validate()) === false) return;
   const data = new FormData(form);
-  data.set('name', nameInput.value.trim());
+  data.set('name', name);
   const phone = form.elements.phone.value.trim();
   if (phone) data.set('phone', phone);
   else data.delete('phone');
@@ -125,4 +129,8 @@ if (typeof createTimePicker === 'function') {
   }
 }
 
-if (location.hash === '#open-form') toggleForm(true);
+if (location.hash === '#open-form') {
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => toggleForm(true));
+  }, { once: true });
+}
